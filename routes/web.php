@@ -56,7 +56,7 @@ Route::post ('/peminjaman/{id}/approve',[PeminjamanController::class, 'approve']
 Route::post ('/peminjaman/{id}/reject', [PeminjamanController::class, 'reject' ])->name('peminjaman.reject');
 
 //CRUD Pengembalian 
-Route::get('/pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
+Route::resource('pengembalian', PengembalianController::class);
 
 //CRUD Laporan 
 Route::get('/laporan/stok', [LaporanController::class, 'stok'])->name('laporan.index');

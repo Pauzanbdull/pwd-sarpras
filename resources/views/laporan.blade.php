@@ -79,40 +79,59 @@
   <div class="absolute w-80 h-80 bg-[#027f84] rounded-full opacity-10 -bottom-40 -right-40 blur-3xl z-0"></div>
   <div class="absolute w-48 h-48 bg-[#04a5a5] rounded-full opacity-15 -top-24 -right-24 blur-2xl z-0"></div>
 
-  <!-- NAVBAR -->
-  <nav class="bg-[#004d4d]/90 backdrop-blur-md px-6 lg:px-12 py-4 shadow-xl z-10 flex flex-col md:flex-row justify-between items-center border-b border-white/10">
-    <div class="flex items-center mb-4 md:mb-0">
-      <h1 class="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-cyan-100">
-      SARPRAS
+  <!-- Sidebar -->
+  <aside class="w-64 bg-[#004d4d]/95 backdrop-blur-lg border-r border-white/10 fixed inset-y-0 left-0 flex flex-col z-20">
+    <div class="flex items-center px-6 py-5 border-b border-white/20">
+      <img src="{{ asset('assets/logotb.jpg') }}" alt="SARPRAS Logo" class="w-10 h-10 rounded-full object-cover mr-3 shadow-lg" loading="lazy" />
+      <h1 class="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-cyan-100">
+        SARPRAS
       </h1>
     </div>
-    
-    <div class="flex items-center space-x-1 md:space-x-6">
-      <div class="hidden md:flex items-center space-x-4">
-        <a href="{{ route('dashboard') }}" class="nav-link px-3 py-2 text-sm font-medium">Dashboard</a>
-        <a href="{{ route('pengguna') }}" class="nav-link px-3 py-2 text-sm font-medium">Pengguna</a>
-        <a href="{{ route('pendataan') }}" class="nav-link px-3 py-2 text-sm font-medium">Pendataan</a>
-        <a href="{{ route('laporan') }}" class="nav-link active px-3 py-2 text-sm font-medium bg-[#027c7c]/50 rounded-lg">Laporan</a>
-      </div>
-      
-      <div class="flex items-center space-x-4 ml-4">
-        <form method="POST" action="{{ route('logout') }}">
-          @csrf
-          <button type="submit" class="flex items-center space-x-2 px-5 py-2.5 bg-[#027c7c] hover:bg-[#03a9a9] rounded-full transition-all duration-200 group shadow-lg hover:shadow-xl">
-                        <span>Logout</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                        </svg>
-                    </button>
-        </form>
-        
-        <div class="relative group flex items-center">
-          <img src="{{ asset('assets/ojan.jpg') }}" alt="Profile" class="w-10 h-10 rounded-full object-cover border-2 border-yellow-400 shadow-md">
-          <span class="absolute -bottom-1 -right-1 bg-yellow-500 text-xs px-2 py-0.5 rounded-full font-medium shadow">ADMIN</span>
-        </div>
-      </div>
+
+    <nav class="flex-1 overflow-y-auto px-4 py-6 space-y-2">
+      <a href="{{ route('dashboard') }}"
+        class="nav-link block px-4 py-3 rounded-lg hover:bg-[#027c7c]/20 font-medium transition-all">
+        Dashboard
+      </a>
+      <a href="{{ route('pengguna') }}"
+        class="nav-link block px-4 py-3 rounded-lg hover:bg-[#027c7c]/20 font-medium transition-all">
+        Pengguna
+      </a>
+      <a href="{{ route('pendataan') }}"
+        class="nav-link block px-4 py-3 rounded-lg hover:bg-[#027c7c]/20 font-medium transition-all">
+        Pendataan
+      </a>
+      <a href="{{ route('laporan') }}"
+        class="nav-link active block px-4 py-3 rounded-lg bg-[#027c7c]/50 hover:bg-[#027c7c]/70 font-medium transition-all">
+        Laporan
+      </a>
+    </nav>
+
+    <div class="px-6 py-4 border-t border-white/20">
+      <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit"
+          class="w-full flex items-center justify-center space-x-2 px-5 py-2.5 bg-[#027c7c] hover:bg-[#03a9a9] rounded-full transition duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-opacity-50 hover:scale-105">
+          <span>Logout</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+        </button>
+      </form>
     </div>
-  </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="flex-1 ml-64">
+    <nav class="bg-[#004d4d]/80 backdrop-blur-md border-b border-white/10 px-6 py-3 flex justify-between items-center sticky top-0 z-10">
+      <div class="text-lg font-medium">Laporan</div>
+      <div class="relative group flex items-center">
+        <img src="{{ asset('assets/ojan.jpg') }}" alt="Profile" class="w-10 h-10 rounded-full object-cover border-2 border-yellow-400 shadow-md transition-transform duration-300 group-hover:scale-110">
+        <span class="absolute -bottom-1 -right-1 bg-yellow-500 text-xs px-2 py-0.5 rounded-full font-medium shadow">ADMIN</span>
+      </div>
+    </nav>
 
   <!-- CONTENT -->
   <main class="relative z-10 px-6 py-8 md:px-12 md:py-10 max-w-7xl mx-auto">
