@@ -35,3 +35,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/peminjaman/{id}/approve', [ApiPeminjamanController::class, 'approve']);
     Route::post('/peminjaman/{id}/reject', [ApiPeminjamanController::class, 'reject']);
 });
+

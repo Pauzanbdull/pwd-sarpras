@@ -18,14 +18,19 @@ class Peminjaman extends Model
         'status',
     ];
 
+    /**
+     * Relasi ke model User (peminjam).
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Relasi ke model Barang (barang yang dipinjam).
+     */
     public function barang()
     {
         return $this->belongsTo(Barang::class);
     }
-
-    public function user()
-{
-    return $this->belongsTo(User::class);
-}
-
 }

@@ -196,7 +196,7 @@
   <!-- Main Content Area -->
   <div class="ml-64">
     <nav class="bg-[#004d4d]/80 backdrop-blur-md border-b border-white/10 px-6 py-3 flex justify-between items-center sticky top-0 z-10">
-      <div class="text-lg font-medium">Manajemen Pengguna</div>
+      <div class="text-lg font-medium">Pengguna</div>
       <div class="relative group flex items-center">
         <img src="{{ asset('assets/ojan.jpg') }}" alt="Profile" class="w-10 h-10 rounded-full object-cover border-2 border-yellow-400 shadow-md transition-transform duration-300 group-hover:scale-110">
         <span class="absolute -bottom-1 -right-1 bg-yellow-500 text-xs px-2 py-0.5 rounded-full font-medium shadow">ADMIN</span>
@@ -210,7 +210,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3 text-cyan-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>
-          Manajemen Pengguna
+          Pengguna
         </h2>
         <div class="w-16 h-1 bg-cyan-400 mb-3 rounded-full"></div>
         <p class="text-white/80 max-w-2xl">Kelola data pengguna sistem termasuk admin dan user biasa dengan hak akses berbeda</p>
@@ -285,9 +285,8 @@
             Daftar Pengguna
           </h3>
           <div class="relative">
-            <input type="text" placeholder="Cari pengguna..." class="bg-white/10 border border-white/20 rounded-full py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent placeholder-white/50">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute right-3 top-3 text-white/50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              
             </svg>
           </div>
         </div>
@@ -352,12 +351,6 @@
         <div class="px-6 py-4 border-t border-white/10 flex items-center justify-between">
           <div class="text-sm text-white/70">
             Menampilkan {{ $users->count() }} dari {{ $adminCount + $userCount }} pengguna
-          </div>
-          <div class="flex space-x-2">
-            <button class="px-3 py-1 rounded-md bg-white/10 hover:bg-white/20 text-sm">Sebelumnya</button>
-            <button class="px-3 py-1 rounded-md bg-cyan-500 text-white text-sm">1</button>
-            <button class="px-3 py-1 rounded-md bg-white/10 hover:bg-white/20 text-sm">2</button>
-            <button class="px-3 py-1 rounded-md bg-white/10 hover:bg-white/20 text-sm">Berikutnya</button>
           </div>
         </div>
       </div>

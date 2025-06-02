@@ -89,9 +89,6 @@
                 </div>
                 <div class="flex items-center space-x-2">
                     <div class="relative">
-                        <input type="text" placeholder="Cari barang..." class="pl-10 pr-4 py-2 rounded-lg bg-[#003845] border border-[#005f73] focus:border-yellow-500 focus:outline-none text-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-2.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
                 </div>
@@ -151,12 +148,6 @@
             <div class="px-6 py-4 bg-[#005f73]/30 text-sm text-gray-300 flex flex-col md:flex-row justify-between items-center gap-4">
                 <div>Menampilkan 1 hingga {{ count($dataStok) }} dari {{ count($dataStok) }} entri</div>
                 <div class="flex space-x-2">
-                    <button class="px-3 py-1 rounded bg-[#005f73] text-white disabled:opacity-50" disabled>
-                        Sebelumnya
-                    </button>
-                    <button class="px-3 py-1 rounded bg-[#005f73] text-white disabled:opacity-50" disabled>
-                        Selanjutnya
-                    </button>
                 </div>
             </div>
         </div>

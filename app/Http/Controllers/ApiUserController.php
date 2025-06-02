@@ -2,76 +2,122 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ApiUserController extends Controller
 {
-    // List semua user
+    // GET /api/users
     public function index()
     {
-        $users = User::all();
-        return response()->json($users);
+        return response()->json([
+            'success' => true,
+            'data' => User::all()
+        ], 200);
     }
 
-    // Tampilkan satu user
+    // GET /api/users/{id}
     public function show($id)
     {
         $user = User::find($id);
 
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found'
+            ], 404);
         }
 
-        return response()->json($user);
+        return response()->json([
+            'success' => true,
+            'data' => $user
+        ], 200);
     }
 
-    // Buat user baru
+    // POST /api/users
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'role'     => 'required|in:user,admin',
+            'password' => 'required|string|min:6'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
         $user = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
-            'password' => Hash::make($request->password),
-            'role'     => $request->role,
+            'password' => Hash::make($request->password)
         ]);
 
-        return response()->json($user, 201); // 201 Created
+        return response()->json([
+            'success' => true,
+            'data' => $user
+        ], 201);
     }
 
-    // Update data user
+    // PUT /api/users/{id}
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-
+        
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found'
+            ], 404);
         }
 
-        $user->update($request->only(['name', 'email', 'role']));
+        $validator = Validator::make($request->all(), [
+            'name'     => 'sometimes|required|string|max:255',
+            'email'    => 'sometimes|required|string|email|max:255|unique:users,email,' . $id,
+            'password' => 'sometimes|required|string|min:6'
+        ]);
 
-        return response()->json($user);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        if ($request->has('name')) $user->name = $request->name;
+        if ($request->has('email')) $user->email = $request->email;
+        if ($request->has('password')) $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'data' => $user
+        ], 200);
     }
 
-    // Hapus user
+    // DELETE /api/users/{id}
     public function destroy($id)
     {
         $user = User::find($id);
 
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found'
+            ], 404);
         }
 
         $user->delete();
 
-        return response()->json(['message' => 'User deleted successfully']);
+        return response()->json([
+            'success' => true,
+            'message' => 'User deleted successfully'
+        ], 200);
     }
 }
