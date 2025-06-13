@@ -78,8 +78,6 @@ Route::post('/register-user', [AuthController::class, 'registerUser'])->name('re
 // ============================
 
 Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman.index');
-Route::get('/peminjaman/create', [PeminjamanController::class, 'create'])->name('peminjaman.create');
-Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');
 Route::post('/peminjaman/{id}/approve', [PeminjamanController::class, 'approve'])->name('peminjaman.approve');
 Route::post('/peminjaman/{id}/reject', [PeminjamanController::class, 'reject'])->name('peminjaman.reject');
 
@@ -88,12 +86,15 @@ Route::post('/peminjaman/{id}/reject', [PeminjamanController::class, 'reject'])-
 // ============================
 
 Route::resource('pengembalian', PengembalianController::class)->middleware('auth');
+Route::get('/laporan/pengembalian', [LaporanController::class, 'pengembalian'])->name('laporan.pengembalian');
 
 // ============================
 //         LAPORAN
 // ============================
 
-Route::get('/laporan/stok', [LaporanController::class, 'stok'])->name('laporan.index');
+Route::get('/laporan/stok', [LaporanController::class, 'stok'])->name('laporan.stok');
+Route::get('/laporan/peminjaman', [LaporanController::class, 'peminjaman'])->name('laporan.peminjaman');
+Route::get('/laporan/pengembalian', [LaporanController::class, 'pengembalian'])->name('laporan.pengembalian');
 
 // ============================
 //        API ROUTES (WEB)

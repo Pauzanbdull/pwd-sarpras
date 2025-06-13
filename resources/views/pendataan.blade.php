@@ -6,6 +6,8 @@
   <title>Pendataan - SARPAS</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Add Font Awesome for more icon options -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     @keyframes fade-in-up {
       0% { opacity: 0; transform: translateY(20px); }
@@ -148,9 +150,7 @@
         <div class="absolute -right-4 -top-4 w-24 h-24 bg-[#04a5a5]/10 rounded-full transition-all duration-300 group-hover:scale-150"></div>
         <div class="relative z-10 flex items-start">
           <div class="stat-card-icon mr-4 p-3 bg-[#04a5a5]/20 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-            </svg>
+            <i class="fas fa-tags text-2xl text-white"></i>
           </div>
           <div>
             <h3 class="text-xl font-semibold mb-2">Kategori Barang</h3>
@@ -164,9 +164,7 @@
         <div class="absolute -right-4 -top-4 w-24 h-24 bg-[#04a5a5]/10 rounded-full transition-all duration-300 group-hover:scale-150"></div>
         <div class="relative z-10 flex items-start">
           <div class="stat-card-icon mr-4 p-3 bg-[#04a5a5]/20 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-            </svg>
+            <i class="fas fa-boxes text-2xl text-white"></i>
           </div>
           <div>
             <h3 class="text-xl font-semibold mb-2">Data Barang</h3>
@@ -180,9 +178,7 @@
         <div class="absolute -right-4 -top-4 w-24 h-24 bg-[#04a5a5]/10 rounded-full transition-all duration-300 group-hover:scale-150"></div>
         <div class="relative z-10 flex items-start">
           <div class="stat-card-icon mr-4 p-3 bg-[#04a5a5]/20 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-            </svg>
+            <i class="fas fa-hand-holding text-2xl text-white"></i>
           </div>
           <div>
             <h3 class="text-xl font-semibold mb-2">Peminjaman Barang</h3>
@@ -192,20 +188,18 @@
       </a>
 
       <!-- Pengembalian -->
-<a href="{{ route('pengembalian.index') }}" class="stat-card animate-fade-in-up animate-delay-2 bg-[#006d6d]/70 p-6 rounded-xl shadow-lg border border-[#1fa5a5]/50 hover:border-[#1fa5a5] overflow-hidden relative group">
-  <div class="absolute -right-4 -top-4 w-24 h-24 bg-[#04a5a5]/10 rounded-full transition-all duration-300 group-hover:scale-150"></div>
-  <div class="relative z-10 flex items-start">
-    <div class="stat-card-icon mr-4 p-3 bg-[#04a5a5]/20 rounded-lg">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-      </svg>
-    </div>
-    <div>
-      <h3 class="text-xl font-semibold mb-2">Pengembalian Barang</h3>
-      <p class="text-sm text-white/80 leading-relaxed">Kelola proses pengembalian barang dan status kondisi barang</p>
-    </div>
-  </div>
-</a>
+      <a href="{{ route('pengembalian.index') }}" class="stat-card animate-fade-in-up animate-delay-2 bg-[#006d6d]/70 p-6 rounded-xl shadow-lg border border-[#1fa5a5]/50 hover:border-[#1fa5a5] overflow-hidden relative group">
+        <div class="absolute -right-4 -top-4 w-24 h-24 bg-[#04a5a5]/10 rounded-full transition-all duration-300 group-hover:scale-150"></div>
+        <div class="relative z-10 flex items-start">
+          <div class="stat-card-icon mr-4 p-3 bg-[#04a5a5]/20 rounded-lg">
+            <i class="fas fa-undo-alt text-2xl text-white"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-2">Pengembalian Barang</h3>
+            <p class="text-sm text-white/80 leading-relaxed">Kelola proses pengembalian barang dan status kondisi barang</p>
+          </div>
+        </div>
+      </a>
 
     </div>
   </main>

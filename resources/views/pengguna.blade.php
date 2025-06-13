@@ -349,9 +349,6 @@
         </div>
         
         <div class="px-6 py-4 border-t border-white/10 flex items-center justify-between">
-          <div class="text-sm text-white/70">
-            Menampilkan {{ $users->count() }} dari {{ $adminCount + $userCount }} pengguna
-          </div>
         </div>
       </div>
 

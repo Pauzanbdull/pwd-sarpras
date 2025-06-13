@@ -5,37 +5,53 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pengembalian;
 use App\Models\Barang;
-use App\Models\Peminjaman; // Tambahkan jika model Peminjam digunakan
+use App\Models\Peminjaman;
 
 class PengembalianController extends Controller
 {
     public function index()
     {
-        $pengembalians = Pengembalian::with(['peminjam', 'barang'])->get();
+        // Ambil semua data pengembalian beserta relasi peminjaman dan barang
+        $pengembalians = Pengembalian::with(['peminjaman.user', 'barang'])->get();
         return view('pengembalian.index', compact('pengembalians'));
     }
 
     public function create()
     {
-        $barangs = Barang::all();
-        $peminjams = Peminjaman::all(); 
-        return view('pengembalian.create', compact('barangs', 'peminjams'));
+        // Ambil hanya peminjaman yang disetujui dan belum dikembalikan
+        $peminjamans = Peminjaman::with('barang', 'user')
+            ->where('status', 'approved')
+            ->doesntHave('pengembalian') // pastikan belum ada pengembalian
+            ->get();
+
+        return view('pengembalian.create', compact('peminjamans'));
     }
 
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
-            'barang_id' => 'required|exists:barangs,id',
-            'peminjam_id' => 'required|exists:peminjams,id',
+            'peminjaman_id' => 'required|exists:peminjamans,id',
             'tanggal_pengembalian' => 'required|date',
+            'jumlah' => 'required|numeric|min:1',
         ]);
 
+        // Ambil data peminjaman terkait
+        $peminjaman = Peminjaman::findOrFail($request->peminjaman_id);
+
+        // Simpan data pengembalian
         Pengembalian::create([
-            'barang_id' => $request->barang_id,
-            'peminjam_id' => $request->peminjam_id,
+            'peminjaman_id' => $peminjaman->id,
+            'barang_id' => $peminjaman->barang_id,
             'tanggal_pengembalian' => $request->tanggal_pengembalian,
+            'jumlah' => $request->jumlah,
         ]);
 
-        return redirect()->route('pengembalian.index')->with('success', 'Data pengembalian berhasil disimpan.');
+        // Perbarui status peminjaman agar tidak bisa dikembalikan dua kali
+        $peminjaman->status = 'returned';
+        $peminjaman->save();
+
+        return redirect()->route('pengembalian.index')
+            ->with('success', 'Data pengembalian berhasil disimpan.');
     }
 }

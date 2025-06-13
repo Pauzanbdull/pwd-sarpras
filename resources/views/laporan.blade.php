@@ -6,6 +6,8 @@
   <title>Laporan - SARPAS</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Add Font Awesome for more icon options -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     @keyframes fade-in-up {
       0% { opacity: 0; transform: translateY(20px); }
@@ -142,13 +144,11 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
       <!-- Laporan Stok Barang -->
-      <a href="{{ route('laporan.index') }}" class="report-card animate-fade-in-up animate-delay-1 bg-[#006d6d]/70 p-6 rounded-xl shadow-lg border border-[#1fa5a5]/50 hover:border-[#1fa5a5] overflow-hidden relative group">
+      <a href="{{ route('laporan.stok') }}" class="report-card animate-fade-in-up animate-delay-1 bg-[#006d6d]/70 p-6 rounded-xl shadow-lg border border-[#1fa5a5]/50 hover:border-[#1fa5a5] overflow-hidden relative group">
         <div class="absolute -right-4 -top-4 w-24 h-24 bg-[#04a5a5]/10 rounded-full transition-all duration-300 group-hover:scale-150"></div>
         <div class="relative z-10 flex items-start">
           <div class="report-card-icon mr-4 p-3 bg-[#04a5a5]/20 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
+            <i class="fas fa-boxes-stacked text-2xl text-white"></i>
           </div>
           <div>
             <h3 class="text-xl font-semibold mb-2">Laporan Stok Barang</h3>
@@ -158,13 +158,11 @@
       </a>
 
       <!-- Laporan Peminjaman -->
-      <a href="#" class="report-card animate-fade-in-up animate-delay-2 bg-[#006d6d]/70 p-6 rounded-xl shadow-lg border border-[#1fa5a5]/50 hover:border-[#1fa5a5] overflow-hidden relative group">
+      <a href="{{ route('laporan.peminjaman') }}" class="report-card animate-fade-in-up animate-delay-2 bg-[#006d6d]/70 p-6 rounded-xl shadow-lg border border-[#1fa5a5]/50 hover:border-[#1fa5a5] overflow-hidden relative group">
         <div class="absolute -right-4 -top-4 w-24 h-24 bg-[#04a5a5]/10 rounded-full transition-all duration-300 group-hover:scale-150"></div>
         <div class="relative z-10 flex items-start">
           <div class="report-card-icon mr-4 p-3 bg-[#04a5a5]/20 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-            </svg>
+            <i class="fas fa-handshake-angle text-2xl text-white"></i>
           </div>
           <div>
             <h3 class="text-xl font-semibold mb-2">Laporan Peminjaman</h3>
@@ -174,13 +172,11 @@
       </a>
 
       <!-- Laporan Pengembalian -->
-      <a href="#" class="report-card animate-fade-in-up animate-delay-1 bg-[#006d6d]/70 p-6 rounded-xl shadow-lg border border-[#1fa5a5]/50 hover:border-[#1fa5a5] overflow-hidden relative group">
+      <a href="{{ route('laporan.pengembalian') }}" class="report-card animate-fade-in-up animate-delay-1 bg-[#006d6d]/70 p-6 rounded-xl shadow-lg border border-[#1fa5a5]/50 hover:border-[#1fa5a5] overflow-hidden relative group">
         <div class="absolute -right-4 -top-4 w-24 h-24 bg-[#04a5a5]/10 rounded-full transition-all duration-300 group-hover:scale-150"></div>
         <div class="relative z-10 flex items-start">
           <div class="report-card-icon mr-4 p-3 bg-[#04a5a5]/20 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-            </svg>
+            <i class="fas fa-rotate-left text-2xl text-white"></i>
           </div>
           <div>
             <h3 class="text-xl font-semibold mb-2">Laporan Pengembalian</h3>
@@ -189,24 +185,5 @@
         </div>
       </a>
 
-      <!-- Laporan Riwayat -->
-      <a href="#" class="report-card animate-fade-in-up animate-delay-2 bg-[#006d6d]/70 p-6 rounded-xl shadow-lg border border-[#1fa5a5]/50 hover:border-[#1fa5a5] overflow-hidden relative group">
-        <div class="absolute -right-4 -top-4 w-24 h-24 bg-[#04a5a5]/10 rounded-full transition-all duration-300 group-hover:scale-150"></div>
-        <div class="relative z-10 flex items-start">
-          <div class="report-card-icon mr-4 p-3 bg-[#04a5a5]/20 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-            </svg>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold mb-2">Laporan Riwayat</h3>
-            <p class="text-sm text-white/80 leading-relaxed">Histori lengkap semua transaksi yang pernah dilakukan</p>
-          </div>
-        </div>
-      </a>
-    </div>
-  </main>
-
-</body>
-
+      
 </html>
