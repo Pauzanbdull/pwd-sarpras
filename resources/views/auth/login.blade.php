@@ -288,7 +288,7 @@
             <button type="submit" id="loginButton"><span id="buttonText">LOGIN</span></button>
         </form>
 
-        <p>Belum punya akun? <a href="{{ route('register') }}">REGISTER</a></p>
+        
     </div>
 
     <script>

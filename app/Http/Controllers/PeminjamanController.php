@@ -12,6 +12,7 @@ class PeminjamanController extends Controller
 {
     public function index()
     {
+        // Ambil data peminjaman lengkap dengan relasi user dan barang, terbaru di atas
         $peminjamans = Peminjaman::with(['user', 'barang', 'approvedBy'])->latest()->get();
         return view('peminjaman.index', compact('peminjamans'));
     }
@@ -25,7 +26,7 @@ class PeminjamanController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'user_id' => 'required|exists:users,id',
             'barang_id' => 'required|exists:barangs,id',
             'jumlah' => 'required|integer|min:1',
@@ -33,18 +34,18 @@ class PeminjamanController extends Controller
             'tanggal_kembali' => 'required|date|after_or_equal:tanggal_pinjam',
         ]);
 
-        $barang = Barang::findOrFail($validated['barang_id']);
+        $barang = Barang::findOrFail($request->barang_id);
 
-        if ($barang->stock < $validated['jumlah']) {
+        if ($barang->stock < $request->jumlah) {
             return back()->with('error', 'Stok barang tidak mencukupi. Stok saat ini: ' . $barang->stock)->withInput();
         }
 
         Peminjaman::create([
-            'user_id' => $validated['user_id'],
-            'barang_id' => $validated['barang_id'],
-            'jumlah' => $validated['jumlah'],
-            'tanggal_pinjam' => $validated['tanggal_pinjam'],
-            'tanggal_kembali' => $validated['tanggal_kembali'],
+            'user_id' => $request->user_id,
+            'barang_id' => $request->barang_id,
+            'jumlah' => $request->jumlah,
+            'tanggal_pinjam' => $request->tanggal_pinjam,
+            'tanggal_kembali' => $request->tanggal_kembali,
             'status' => 'pending',
         ]);
 
@@ -55,12 +56,8 @@ class PeminjamanController extends Controller
     {
         $peminjaman = Peminjaman::with('barang')->findOrFail($id);
 
-        if ($peminjaman->status !== 'pending') {
-            return back()->with('error', 'Hanya peminjaman yang berstatus pending yang dapat disetujui.');
-        }
-
         if ($peminjaman->barang->stock < $peminjaman->jumlah) {
-            return back()->with('error', 'Stok barang tidak cukup. Stok saat ini: ' . $peminjaman->barang->stock);
+            return back()->withErrors(['stok' => 'Stok barang tidak cukup untuk peminjaman. Stok saat ini: ' . $peminjaman->barang->stock]);
         }
 
         DB::transaction(function () use ($peminjaman) {
@@ -72,7 +69,7 @@ class PeminjamanController extends Controller
             $peminjaman->barang->decrement('stock', $peminjaman->jumlah);
         });
 
-        return back()->with('success', 'Peminjaman disetujui dan stok barang dikurangi.');
+        return back()->with('success', 'Peminjaman disetujui dan stok barang telah dikurangi.');
     }
 
     public function reject($id)
@@ -80,9 +77,10 @@ class PeminjamanController extends Controller
         $peminjaman = Peminjaman::findOrFail($id);
 
         if ($peminjaman->status !== 'pending') {
-            return back()->with('error', 'Hanya peminjaman yang berstatus pending yang dapat ditolak.');
+            return back()->with('error', 'Hanya peminjaman dengan status pending yang bisa ditolak.');
         }
 
+        // ✅ PERBAIKAN DISINI: pisahkan update dan return
         $peminjaman->update([
             'status' => 'rejected',
             'approved_by' => auth()->id(),
@@ -95,11 +93,11 @@ class PeminjamanController extends Controller
     {
         $peminjaman = Peminjaman::findOrFail($id);
 
-        if ($peminjaman->status === 'approved' || $peminjaman->status === 'rejected') {
+        if ($peminjaman->status === 'selesai') {
             $peminjaman->delete();
             return back()->with('success', 'Riwayat peminjaman dihapus.');
         }
 
-        return back()->with('error', 'Hanya peminjaman yang sudah diproses (disetujui/ditolak) yang dapat dihapus.');
+        return back()->with('error', 'Hanya peminjaman yang sudah selesai bisa dihapus.');
     }
 }

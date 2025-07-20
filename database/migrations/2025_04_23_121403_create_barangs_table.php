@@ -8,26 +8,31 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * Migration ini membuat tabel 'barangs' untuk menyimpan data barang inventaris.
      */
     public function up()
     {
         Schema::create('barangs', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_barang');           // kolom nama_barang
-            $table->unsignedBigInteger('kategori_id'); // foreign key kategori dengan nama kategori_id
-            $table->text('deskripsi')->nullable();   // kolom deskripsi, boleh kosong
-            $table->string('gambar')->nullable();    // kolom gambar, boleh kosong
-            $table->integer('stock')->default(0);    // kolom stock, default 0
-            $table->timestamps();
+            $table->id(); // Primary key otomatis
+            $table->string('nama_barang'); // Nama barang
+            $table->text('deskripsi')->nullable(); // Deskripsi barang (boleh kosong)
+            $table->string('gambar')->nullable(); // Path gambar barang (boleh kosong)
+            
+            // Foreign key ke tabel kategori_barang
+            $table->foreignId('kategori_id')
+                  ->constrained('kategori_barang') // Pastikan ini sesuai nama tabel yang ada
+                  ->onDelete('cascade'); // Jika kategori dihapus, barang ikut terhapus
 
-            $table->foreign('kategori_id')
-                ->references('id')->on('kategori_barang')
-                ->onDelete('cascade');
+            $table->integer('stock')->default(0); // Jumlah stok barang
+            $table->timestamps(); // Kolom created_at dan updated_at
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * Digunakan saat rollback, untuk menghapus tabel 'barangs'.
      */
     public function down(): void
     {

@@ -12,7 +12,7 @@ class LaporanController extends Controller
     public function stok()
     {
         $dataStok = Barang::with('kategori')->get();
-        return view('laporan.stok', compact('dataStok'));
+        return view('laporan.index', compact('dataStok'));
     }
 
     // Menampilkan laporan peminjaman barang

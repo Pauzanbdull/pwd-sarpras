@@ -10,14 +10,14 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::table('pengembalian', function (Blueprint $table) {
+        Schema::table('pengembalians', function (Blueprint $table) {
             $table->integer('jumlah')->after('peminjaman_id')->default(1);
         });
     }
 
     public function down()
     {
-        Schema::table('pengembalian', function (Blueprint $table) {
+        Schema::table('pengembalians', function (Blueprint $table) {
             $table->dropColumn('jumlah');
         });
     }

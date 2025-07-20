@@ -95,7 +95,7 @@
         class="nav-link block px-4 py-3 rounded-lg hover:bg-[#027c7c]/20 font-medium transition-all">
         Dashboard
       </a>
-      <a href="{{ route('pengguna') }}"
+      <a href="{{ route('pengguna.index') }}"
         class="nav-link block px-4 py-3 rounded-lg hover:bg-[#027c7c]/20 font-medium transition-all">
         Pengguna
       </a>
@@ -143,8 +143,9 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+
       <!-- Laporan Stok Barang -->
-      <a href="{{ route('laporan.stok') }}" class="report-card animate-fade-in-up animate-delay-1 bg-[#006d6d]/70 p-6 rounded-xl shadow-lg border border-[#1fa5a5]/50 hover:border-[#1fa5a5] overflow-hidden relative group">
+      <a href="{{ route('laporan.index') }}" class="report-card animate-fade-in-up animate-delay-1 bg-[#006d6d]/70 p-6 rounded-xl shadow-lg border border-[#1fa5a5]/50 hover:border-[#1fa5a5] overflow-hidden relative group">
         <div class="absolute -right-4 -top-4 w-24 h-24 bg-[#04a5a5]/10 rounded-full transition-all duration-300 group-hover:scale-150"></div>
         <div class="relative z-10 flex items-start">
           <div class="report-card-icon mr-4 p-3 bg-[#04a5a5]/20 rounded-lg">

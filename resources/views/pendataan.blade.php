@@ -96,7 +96,7 @@
       class="nav-link block px-4 py-3 rounded-lg hover:bg-[#027c7c]/20 font-medium transition-all">
       Dashboard
     </a>
-     <a href="{{ route('pengguna') }}"
+     <a href="{{ route('pengguna.index') }}"
       class="nav-link block px-4 py-3 rounded-lg hover:bg-[#027c7c]/20 font-medium transition-all">
       Pengguna
     </a>

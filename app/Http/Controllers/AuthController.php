@@ -10,14 +10,13 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    // =======================
-    // WEB: REGISTRASI ADMIN
-    // =======================
+    // Tampilkan form registrasi admin
     public function showRegistrationForm()
     {
         return view('auth.register');
     }
 
+    // Proses registrasi admin
     public function register(Request $request)
     {
         $request->validate([
@@ -37,14 +36,13 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registrasi Admin berhasil! Silakan login.');
     }
 
-    // =======================
-    // WEB: REGISTRASI USER BIASA
-    // =======================
+    // Tampilkan form registrasi user
     public function showUserRegistrationForm()
     {
         return view('auth.register_user');
     }
 
+    // Proses registrasi user biasa
     public function registerUser(Request $request)
     {
         $request->validate([
@@ -60,17 +58,16 @@ class AuthController extends Controller
             'role' => 'user',
         ]);
 
-        return redirect()->route('pengguna')->with('success', 'User berhasil ditambahkan.');
+        return redirect()->route('pengguna.index')->with('success', 'User berhasil ditambahkan.');
     }
 
-    // =======================
-    // WEB: LOGIN ADMIN
-    // =======================
+    // Tampilkan form login
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
+    // Proses login admin
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -80,46 +77,32 @@ class AuthController extends Controller
 
             if (Auth::user()->role !== 'admin') {
                 Auth::logout();
-
-                return back()->withErrors([
-                    'email' => 'Akun anda bukan admin.',
-                ])->withInput();
+                return back()->withErrors(['email' => 'Akun anda bukan admin.'])->withInput();
             }
 
             return redirect()->route('dashboard');
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ])->withInput();
+        return back()->withErrors(['email' => 'Email atau password salah.'])->withInput();
     }
 
-    // =======================
-    // WEB: LOGOUT
-    // =======================
-    // Controller untuk Logout
-public function logout(Request $request)
-{
-    Auth::logout(); // Proses logout
+    // Logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-    // Set flash message untuk ditampilkan
-    session()->flash('status', 'Log Out Berhasil');
+        return redirect()->route('login');
+    }
 
-    return redirect()->route('login'); // Redirect ke halaman login atau halaman lain
-}
-
-
-    // =======================
-    // WEB: DASHBOARD ADMIN
-    // =======================
+    // Tampilkan dashboard admin
     public function dashboard()
     {
         return view('dashboard');
     }
 
-    // =======================
-    // API: LOGIN USER (FLUTTER)
-    // =======================
+    // Login API
     public function apiLogin(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -137,11 +120,6 @@ public function logout(Request $request)
             return response()->json(['message' => 'Email atau password salah'], 401);
         }
 
-        // Hanya izinkan role 'user' untuk login dari aplikasi
-        if ($user->role !== 'user') {
-            return response()->json(['message' => 'Akun ini tidak bisa login dari aplikasi'], 403);
-        }
-
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
@@ -151,9 +129,7 @@ public function logout(Request $request)
         ]);
     }
 
-    // =======================
-    // API: LOGOUT USER (FLUTTER)
-    // =======================
+    // Logout API
     public function apiLogout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();

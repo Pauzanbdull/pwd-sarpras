@@ -68,7 +68,7 @@
       <a href="{{ route('dashboard') }}" class="nav-link active block px-4 py-3 rounded-lg bg-[#027c7c]/50 hover:bg-[#027c7c]/70 font-medium">
         Dashboard
       </a>
-      <a href="{{ route('pengguna') }}" class="nav-link block px-4 py-3 rounded-lg hover:bg-[#027c7c]/20 font-medium">
+      <a href="{{ route('pengguna.index') }}" class="nav-link block px-4 py-3 rounded-lg hover:bg-[#027c7c]/20 font-medium">
         Pengguna
       </a>
       <a href="{{ route('pendataan') }}" class="nav-link block px-4 py-3 rounded-lg hover:bg-[#027c7c]/20 font-medium">
@@ -117,7 +117,7 @@
         </div>
         <div class="flex items-center justify-between">
           <p class="text-sm text-white/90">Total pengguna saat ini.</p>
-          <a href="{{ route('pengguna') }}" class="text-xs font-medium hover:underline">Lihat semua →</a>
+          <a href="{{ route('pengguna.index') }}" class="text-xs font-medium hover:underline">Lihat semua →</a>
         </div>
       </div>
 
